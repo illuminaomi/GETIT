@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UnitTesting av datoString!</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+<body>
+    
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+
+
+    <script src="kodeSomSkalTestes.js"> </script>
+
+    <script>
+         QUnit.test("length is 10", function (assert) {
+            let isValid = isThisCorrect('10.10.2010');
+            let expected = true;
+            assert.equal(isValid, expected);
+        });
+ 
+        QUnit.test("dots at 2 & 5", function (assert) {
+            let isValid = isThisCorrect('10.10.2010');
+            let expected = true;
+            assert.equal(isValid, expected);
+        });
+
+        //År er 0000 eller større. Kan sjekkes med year.length === 4 && year >= '0000' && year <= '9999'
+        QUnit.test("is year valid", function (assert) {
+            let isValid = isThisCorrect('10.10.2010');
+            let expected = true;
+            assert.equal(isValid, expected);
+        });
+
+        //Måned er fra og med 01 til 12
+        QUnit.test("is month between 01 and 12", function (assert) {
+            let isValid = isMonth01Or12('10.12.2010');
+            let expected = true;
+            assert.equal(isValid, expected);
+        });
+
+        /*Dag er fra og med 01 til og med 28
+          29 er lov for februar hvis det er skuddår.
+          30 er lov for alle måneder utenom februar
+          31 er lovlig for januar, mars, mai, juli, august, oktober og desember
+        */
+        QUnit.test("31 er lovlig for januar, mars, mai, juli, august, oktober og desember", function (assert) {
+            let isValid = isThisCorrect('31.03.2010');
+            let expected = true;
+            assert.equal(isValid, expected);
+        });
+
+        QUnit.test("30 er lov for alle måneder utenom februar", function (assert) {
+            let isValid = isThisCorrect('30.11.2010');
+            let expected = true;
+            assert.equal(isValid, expected);
+        });
+
+        QUnit.test("29 er lov for februar hvis det er skuddår", function (assert) {
+            let isValid = isThisCorrect('29.12.2020');
+            let expected = true;
+            assert.equal(isValid, expected);
+        });
+
+        //RETURNS FALSE
+
+        QUnit.test("length is NOT 10", function (assert) {
+            let isValid = isThisCorrect('10.10.201010');
+            let expected = false;
+            assert.equal(isValid, expected);
+        });
+
+        QUnit.test("dots NOT at 2 & 5", function (assert) {
+            let isValid = isThisCorrect('10.1020.1010');
+            let expected = false;
+            assert.equal(isValid, expected);
+        });
+
+        QUnit.test("year is NOT valid", function (assert) {
+            let isValid = isThisCorrect('29.12.12035');
+            let expected = false;
+            assert.equal(isValid, expected);
+        });
+
+        QUnit.test("month is NOT between 01 and 12", function (assert) {
+            let isValid = isThisCorrect('15.15.2010');
+            let expected = false;
+            assert.equal(isValid, expected);
+        });
+
+        QUnit.test("31 er lovlig for januar, mars, mai, juli, august, oktober og desember", function (assert) {
+            let isValid = isThisCorrect('31.02.2010');
+            let expected = false;
+            assert.equal(isValid, expected);
+        });
+
+        QUnit.test("30 er lov for alle måneder utenom februar", function (assert) {
+            let isValid = isThisCorrect('30.02.2010');
+            let expected = false;
+            assert.equal(isValid, expected);
+        });
+
+        QUnit.test("29 er lov for februar hvis det er skuddår", function (assert) {
+            let isValid = isThisCorrect('29.02.2019');
+            let expected = false;
+            assert.equal(isValid, expected);
+        });
+    
+    </script>
+</body>
+</html>

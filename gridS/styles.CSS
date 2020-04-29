@@ -1,0 +1,40 @@
+  body {
+                padding: 30px;
+                margin: 40px;
+            }
+            div.page {
+                display: grid;
+                grid-gap: 1em;
+                grid-template-columns: 200px 100fr;
+                grid-template-rows: 100px 275px 100px 25px;
+                grid-template-areas: 'header header'
+                                    'menu mainContent'
+                                    'footer footer'
+                                    'feets feets';
+            }
+            div.header {
+                background-color:lightpink;
+                grid-area: header; 
+                border-radius: 10px;
+                
+            }
+            div.menu {
+                background-color:papayawhip;
+                grid-area: menu;
+                border-radius: 10px;
+            }
+            div.mainContent {
+                background-color:lightgray;
+                grid-area: mainContent;
+                border-radius: 10px;
+            }
+            div.footer {
+                background-color:gray;
+                grid-area: footer; 
+                border-radius: 10px;
+            }
+            div.feets {
+                background-color:rgb(56, 55, 55);
+                grid-area: feets; 
+                border-radius: 10px;
+            }

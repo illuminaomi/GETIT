@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js"></script>
+
+    <style>
+        body, html {
+            
+        }
+        #frame {
+            background-image: url("background.jpg");
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+            min-width: 50%;
+            min-height: 50%; 
+        }
+        button  {
+            color: red;
+        }
+
+        #boss   {
+            top: 40px;
+            left: 80px;
+        }
+
+        
+    </style>
+
+</head>
+<body>
+
+
+
+<img class="backdropImage" src="background.jpg" alt="backdrop">
+
+    <div class="frame">
+            <div id="battlePoint" class="innerDiv">
+
+                <img class="boss" src="boss.gif" alt="boss" width="700">
+
+                <progress id="lifeNpc" value="200" max="200"></progress>
+                <progress id="shieldNpc" value="200" max="200"></progress>
+
+                <img class="hero" src="hero-transparent.gif" alt="hero">
+
+                <progress id="lifeFox" value="100" max="100"></progress>
+                <progress id="shieldFox" value="100" max="100"></progress>
+
+                <button id="attackFox" onclick="attackFunc()">Attack</button>
+
+                <button id="shieldButton" onclick="shieldFunc()">Shield</button>
+
+                <div id="battleInfo"></div>
+            </div>
+
+    </div>
+    
+</body>
+</html>
+
+<!--id for lifeNpc, lifeFox, shieldNpc, shieldFox, attackNpc, attackFox-->
+
+<!-- To do:
+     - backdrop constrained to window size.
+     - overlay hero and boss onto backdrop.
+     - fixx button placement and health bars.
+     - fighting mechanics (Javascript).
+     - possibly background music (Game music?).
+
+     Game mechanics - 
+
+                    Attack
+                    Parry
+                    Block
+
+                    Winner message 
+                    updated info box.

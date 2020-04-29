@@ -1,0 +1,19 @@
+p{
+    color: red;
+}
+div{
+    font-size: 450%;
+    color: green;
+    background-color:lightgreen;
+    border-style: dotted;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: left;
+    clear: left;
+}
+body {
+    margin: 10px;
+}
+#gas {
+    font-style: italic;
+}

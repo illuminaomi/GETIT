@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <p>Ferdighet 10 - Funksjoner med parametre - synlig resultat </p>
+    <button onclick="showDiv(500, 500, 'Alternativ 1', 'lightblue')">Alternativ 1</button>
+    <button onclick="showDiv(800, 100, 'Alternativ 2', 'pink')">Alternativ 2</button>
+    <button onclick="showDiv(100, 600, 'Alternativ 3', 'lightgreen')">Alternativ 2</button>
+    <div id="resultat"></div>
+    <script>
+        var resultatDiv = document.getElementById('resultat');
+
+        function showDiv(color, height, text, color) {
+            text = text + ' ' + text + ' ' + text + ' ' + text + ' ' + text;
+            text = text + ' ' + text + ' ' + text + ' ' + text + ' ' + text;
+            var backgroundColorStyle = 'background-color: ' + color + ';';
+            var widthStyle = 'width: ' + width + 'px;';
+            var heightStyle = 'height: ' + height + 'px;';
+            var style = 'style="' + backgroundColorStyle + widthStyle + heightStyle + '"';
+            resultatDiv.innerHTML = '<div ' + style + '>' + text + '</div>';
+        }
+    </script>
+</body>
+
+
+</html>
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body onload="testOnLoad()">
+    <p>Ferdighet 2a - Alternative eventhandlere: onchange osv.</p>
+    <input type="text" onchange="testOnChange()" oninput="testOnInput()" />
+    <h3 onmouseover="testOnMouseOver()" onmouseout="testOnMouseOut()">Test test test</h3>
+    <h2 id="results"></h2>
+
+    <a href="https://www.w3schools.com/jsref/dom_obj_event.asp">Mer informasjon her</a>
+    <script>
+
+            var results = document.getElementById('results');
+        
+                function allInOne() {
+                        var onChange = document.getElementById('results').innerHTML += '<li>onchange</li>';
+                        var onLoad = document.getElementById('results').innerHTML += '<li>onload</li>';
+                        var onInput = document.getElementById('results').innerHTML += '<li>oninput</li>';
+                        var onMouseOver = document.getElementById('results').innerHTML += '<li>onmouseover</li>';
+                        var onMouseOut = document.getElementById('info').innerHTML += '<li>onmouseout</li>';
+                                results.innerHTML = '<div ' + style + '>' + text + '</div>';
+
+
+                }
+
+
+    </script>
+</body>
+</html>
