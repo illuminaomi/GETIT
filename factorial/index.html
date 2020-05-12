@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="500">
+    <script>
+        var element = document.getElementById('canvas');
+        var context = element.getContext('2d');
+
+        context.fillStyle = 'black';
+        context.lineWidth = 1;
+
+        var deg_to_rad = Math.PI / 180.0;
+        var depth = 9;
+
+        function drawLine(x1, y1, x2, y2, brightness){
+            context.moveTo(x1, y1);
+            context.lineTo(x2, y2);
+        }
+
+        function drawTree(x1, y1, x2, y2, depth){
+            if (depth !== 0){
+                var x2 = x1 + (Math.cos(angle * deg_to_rad) * depth * 10.0);
+                var y2 = y1 + (Math.sin(angle * deg_to_rad) * depth * 10.0);
+                drawLine(x1, y1, x2, y2, depth);
+                drawTree(x2, y2, angle - 20, depth - 1);
+                drawTree(x2, y2, angle + 20, depth - 1);
+            }
+        }
+
+        context.beginPath();
+        drawTree(300, 500, -90, depth);
+        context.closePath();
+        context.stroke();
+        
+    </script>
+    </canvas>
+</body>
+</html>

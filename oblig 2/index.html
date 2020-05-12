@@ -8,68 +8,79 @@
 </head>
 <body>
     
-<div id="content"></div>
+    <div id="content"></div>
 
-<script>
+    <script src="script.js"></script>
+    <script>
+
+        // hjelpevariable for både view og controller
+        var contentDiv = document.getElementById('content');
 
 
-    // hjelpevariable for både view og controller
-    var contentDiv = document.getElementById('content');
-    
-    // model
-    let numbers = [7, 3, 1, 5, 8];
-    
-    // view
-    show();
-    function show() {
-        let svgInnerHtml = '';
-        for (let i = 0; i < numbers.length; i++) {
-            svgInnerHtml += createBar(numbers[i], i + 1);
+        // model
+        let numbers = [7, 3, 1, 5, 8];
+        let selectedBar = null;
+        let errorMessage = '';
+        let inputValue;
+
+
+        // view
+        show();
+        function show() {
+            let onOffButton = selectedBar == null ? 'disabled' : ''
+            let svgInnerHtml = '';
+            for (let i = 0; i < numbers.length; i++) {
+                svgInnerHtml += createBar(numbers[i], i + 1);
+            }
+            contentDiv.innerHTML = `
+                <svg id="chart" width="500" viewBox="0 0 60 60">
+                    ${svgInnerHtml}
+                </svg>
+                
+                <br/>
+                Valgt stolpe: <i id="chosenBarText">${selectedBar}</i>
+                <br />
+                Verdi: <input id="value" type="number" min="1" max="10" oninput="inputValue=this.value"/>
+                <button id="addBarButton" onclick="addBar()">Legg til stolpe</button>
+                
+                <button id="editBarButton" onclick="editBar()" 
+                ${offOnButton}>Endre valgt stolpe</button><br />
+                
+                <button id="removeBarButton" onclick="removeBar()"
+                 ${offOnButton}>Fjerne valgt stolpe</button>
+                 
+                <br/>
+                <div id="warningDiv">${errorMessage}</div>
+                `;
         }
-        
-        contentDiv.innerHTML = `
-            <svg id="chart" width="500" viewBox="0 0 80 60">
-                ${svgInnerHtml}
-            </svg><br/>
-            <p id="barSelect">Valgt stolpe: <i>ingen</i></p>
-            <br />
-            Verdi:
-            <input type="number" min="1" max="10" />
-            <button>Legg til stolpe</button>
-            <button disabled>Endre valgt stolpe</button><br />
-            <button disabled>Fjerne valgt stolpe</button>
-            `;
-           
-    }
-    
-    function createBar(number, barNo) {
-        const width = 8;
-        const spacing = 2;
-        let x = (barNo - 1) * (width + spacing);
-        let height = number * 10;
-        let y = 60 - height;
-        let color = calcColor(1, 10, barNo);
-        
-        return `<rect id="bar${barNo}" width="${width}" height="${height}"
-                            x="${x}" y="${y}" fill="${color}" onclick="update(${number},${barNo})"></rect>`;
-    }
-    
-    function calcColor(min, max, val) {
-        var minHue = 240, maxHue = 0;
-        var curPercent = (val - min) / (max - min);
-        var colString = "hsl(" + ((curPercent * (maxHue - minHue)) + minHue) + ",100%,50%)";
-        return colString;
-    }
-    
-    function update(number, barNo) {        
-        var bar = document.getElementById('bar' + barNo)
-        document.getElementById('barSelect').innerHTML = 'Valgt stolpe: ' + barNo
-        bar.setAttribute("stroke", "black")
-    }
-    
-    
-    
-    // controller (ingenting her ennå)
+
+        function createBar(number, numberOfBars) {
+            const width = 8;
+            const spacing = 2;
+            let x = (numberOfBars - 1) * (width + spacing);
+            let height = number * 5;
+            let y = 60 - height;
+            let border = 0;
+            let color = calcColor(1, 10, numberOfBars);
+            if (selectedBar != 'None' && numberOfBars == selectedBar) {
+                border = 1;
+            }
+            return `<rect onclick="barChooser(${numberOfBars})" 
+                        width="${width}" height="${height}"
+                        x="${x}" y="${y}" fill="${color}"
+                            stroke-width="${border}"
+                            stroke="black">
+                        </rect>`;
+        }
+
+
+        function calcColor(min, max, val) {
+            var minHue = 240, maxHue = 0;
+            var curPercent = (val - min) / (max - min);
+            var colString = "hsl(" + ((curPercent * (maxHue - minHue)) + minHue) + ",100%,50%)";
+            return colString;
+            show();
+        }
     </script>
 </body>
 </html>
